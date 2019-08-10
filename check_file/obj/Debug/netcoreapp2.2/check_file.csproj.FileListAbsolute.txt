@@ -1,0 +1,11 @@
+C:\Users\kotmavell\source\repos\check_file\check_file\bin\Debug\netcoreapp2.2\check_file.deps.json
+C:\Users\kotmavell\source\repos\check_file\check_file\bin\Debug\netcoreapp2.2\check_file.runtimeconfig.json
+C:\Users\kotmavell\source\repos\check_file\check_file\bin\Debug\netcoreapp2.2\check_file.runtimeconfig.dev.json
+C:\Users\kotmavell\source\repos\check_file\check_file\bin\Debug\netcoreapp2.2\check_file.dll
+C:\Users\kotmavell\source\repos\check_file\check_file\bin\Debug\netcoreapp2.2\check_file.pdb
+C:\Users\kotmavell\source\repos\check_file\check_file\obj\Debug\netcoreapp2.2\check_file.csprojAssemblyReference.cache
+C:\Users\kotmavell\source\repos\check_file\check_file\obj\Debug\netcoreapp2.2\check_file.csproj.CoreCompileInputs.cache
+C:\Users\kotmavell\source\repos\check_file\check_file\obj\Debug\netcoreapp2.2\check_file.AssemblyInfoInputs.cache
+C:\Users\kotmavell\source\repos\check_file\check_file\obj\Debug\netcoreapp2.2\check_file.AssemblyInfo.cs
+C:\Users\kotmavell\source\repos\check_file\check_file\obj\Debug\netcoreapp2.2\check_file.dll
+C:\Users\kotmavell\source\repos\check_file\check_file\obj\Debug\netcoreapp2.2\check_file.pdb
