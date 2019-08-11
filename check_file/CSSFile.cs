@@ -8,43 +8,35 @@ namespace check_file
 {
     class CSSFile : AbstractParser
     {
-        public string finalName;
+        private string filePath;
 
-        public CSSFile(string finalName)
+        public CSSFile(string filePath)
         {
-            this.finalName = finalName;
+            this.filePath = filePath;
         }
         public override int getSymbolCount()
-        {
-            int countSymbol = 0;
-
-            int countOt = 0;
-            int countZac = 0;
-            StreamReader file = new StreamReader(finalName, System.Text.Encoding.Default);
+        { 
+            int countOpen = 0;
+            int countClose = 0;
+            StreamReader file = new StreamReader(filePath, System.Text.Encoding.Default);
             string line;
             while ((line = file.ReadLine()) != null)
             {
                 string pattern1 = @"}";
                 Regex regex = new Regex(pattern1);
                 MatchCollection mc = regex.Matches(line);
-
-                countOt += mc.Count;
+                countOpen += mc.Count;
 
                 string pattern2 = @"{";
                 regex = new Regex(pattern2);
                 mc = regex.Matches(line);
-
-                countZac += mc.Count;
+                countClose += mc.Count;
             }
 
-            if (countZac == countOt)
-            {
+            if (countClose == countOpen)
                 return 1;
-            }
             else
-            {
-                return 0;
-            }     
+                return 0;  
         }
     }
 }

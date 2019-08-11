@@ -8,19 +8,17 @@ namespace check_file
 {
     class OtherFile : AbstractParser
     {
-        public string nameFile;
-        public string typeFile;
-        public string finalName;
+        private string filePath;
 
-        public OtherFile(string finalName)
+        public OtherFile(string filePath)
         {
-            this.finalName = finalName;
+            this.filePath = filePath;
         }
         public override int getSymbolCount()
         {
             int countSymbol = 0;
 
-            StreamReader file = new StreamReader(finalName, System.Text.Encoding.Default);
+            StreamReader file = new StreamReader(filePath, System.Text.Encoding.Default);
             string line;
             while((line = file.ReadLine()) != null)
             {

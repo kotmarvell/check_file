@@ -8,29 +8,23 @@ namespace check_file
 {
     class HTMLFile : AbstractParser
     {
-        public string finalName;
+        private string filePath;
 
-        public HTMLFile(string finalName)
+        public HTMLFile(string filePath)
         {
-            this.finalName = finalName;
+            this.filePath = filePath;
         }
         public override int getSymbolCount()
         {
             int countSymbol = 0;
 
-            StreamReader file = new StreamReader(finalName, System.Text.Encoding.Default);
+            StreamReader file = new StreamReader(filePath, System.Text.Encoding.Default);
             string line;
             while ((line = file.ReadLine()) != null)
             {
-                string pattern1 = @"}";
+                string pattern1 = @"<div\w*";
                 Regex regex = new Regex(pattern1);
                 MatchCollection mc = regex.Matches(line);
-
-                countSymbol += mc.Count;
-
-                string pattern2 = @"{";
-                regex = new Regex(pattern2);
-                mc = regex.Matches(line);
 
                 countSymbol += mc.Count;
             }
