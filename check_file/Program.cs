@@ -5,21 +5,13 @@ namespace check_file
 {
     class Program
     {
+        public static string nameDirectory = "C:/Users/kotmavell/Desktop/test";
         static void Main(string[] args)
         {
-            //Console.WriteLine("");
+            Console.WriteLine("Hello world");
             //string nameDirectory = Console.ReadLine();
 
-            //// If a directory is not specified, exit program.
-            //if (nameDirectory.Length < 3)
-            //{
-            //    // Display the proper way to call the program.
-            //    Console.WriteLine("Usage: Watcher.exe (directory)");
-            //    return;
-            //}
-
-            FileSystemWatcher watcher = new FileSystemWatcher("C:/Users/kotmavell/Desktop/test");
-            //FileSystemWatcher watcher = new FileSystemWatcher(nameDirectory);
+            FileSystemWatcher watcher = new FileSystemWatcher(nameDirectory);
 
             watcher.Filter = "*.*";
 
@@ -34,13 +26,9 @@ namespace check_file
 
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
-            Console.WriteLine($"File: {e.Name} {e.ChangeType}");
-
-            //if (typeFile(Convert.ToString(e.Name)) == ".txt")
-            //{
-                
-            //}
-
+            Console.WriteLine($"File: {e.Name} {e.ChangeType} ");  
+            string finalName = nameDirectory + "/" + Convert.ToString(e.Name);
+            getClassByFileType(finalName);
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
@@ -53,6 +41,32 @@ namespace check_file
             int point = name.IndexOf(".");
             string type = name.Remove(0, point);
             return type;
+        }
+
+        private static void getClassByFileType(string finalName)
+        {
+            string type = typeFile(finalName);
+            switch (type)
+            {
+                case ".css":
+                    {
+                        //CSSFile file = new CSSFile(finalName);
+                        //Console.WriteLine(file.getSymbolCount());
+                        break;
+                    }
+                case ".html":
+                    {
+                        //HTMLFile file = new HTMLFile(finalName);
+                        //Console.WriteLine(file.getSymbolCount());
+                        break;
+                    }
+                default:
+                    {
+                        OtherFile file = new OtherFile(finalName);
+                        Console.WriteLine(file.getSymbolCount());
+                        break;
+                    }
+            }
         }
     }
 }

@@ -1,22 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace check_file
 {
     class OtherFile : AbstractParser
     {
-        //public string namefile;
-        //public string type;
-        //public TxtFile(string name)
-        //{
-        //    namefile = name;
-        //}
-        public override int getSimbolCount()
-        {
-            int countSimbol = 0;
+        public string nameFile;
+        public string typeFile;
+        public string finalName;
 
-            return countSimbol;
+        public OtherFile(string finalName)
+        {
+            this.finalName = finalName;
+        }
+        public override int getSymbolCount()
+        {
+            int countSymbol = 0;
+
+            StreamReader file = new StreamReader(finalName, System.Text.Encoding.Default);
+            string line;
+            while((line = file.ReadLine()) != null)
+            {
+                string pattern = @"[-.?!)(,:]";
+                Regex regex = new Regex(pattern);
+                MatchCollection mc = regex.Matches(line);
+
+                countSymbol += mc.Count;
+            }
+
+            return countSymbol;
         }
     }
 }

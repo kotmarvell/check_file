@@ -6,6 +6,6 @@ namespace check_file
 {
     abstract class AbstractParser
     {
-        public abstract int getSimbolCount();
+        public abstract int getSymbolCount();
     }
 }
