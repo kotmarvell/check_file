@@ -22,13 +22,13 @@ namespace check_file
             string line;
             while ((line = file.ReadLine()) != null)
             {
-                string pattern1 = @"}";
+                string pattern1 = @"<div\w*";
                 Regex regex = new Regex(pattern1);
                 MatchCollection mc = regex.Matches(line);
 
                 countSymbol += mc.Count;
 
-                string pattern2 = @"{";
+                string pattern2 = @"\w*</div>";
                 regex = new Regex(pattern2);
                 mc = regex.Matches(line);
 
