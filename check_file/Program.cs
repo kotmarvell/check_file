@@ -5,15 +5,15 @@ namespace check_file
 {
     class Program
     {
-        public static string nameDirectory = "C:/Users/kotmavell/Desktop/test";
+        public static string nameDirectory = " "; //Вы можете вставить готовый путь сюда
         static void Main(string[] args)
         {
             Console.WriteLine("Hello. Please write the directory path.");
-            //string nameDirectory = Console.ReadLine();
+            nameDirectory = Console.ReadLine(); //Или записать его после запуска программы
 
             FileSystemWatcher watcher = new FileSystemWatcher(nameDirectory);
 
-            watcher.Filter = "*.*";
+            watcher.Filter = "*.*"; //Смотрит на все файлы
 
             watcher.Changed += new FileSystemEventHandler(OnChanged);
             watcher.Created += new FileSystemEventHandler(OnChanged);
@@ -54,7 +54,8 @@ namespace check_file
         {
             string type = typeFile(filePath);
             AbstractParser parser = getParserByType(type, filePath);
-            string result = nameFile + " " + changeType + " " + parser.getSymbolCount();
+            string result = nameFile + " " + changeType + " result " 
+                + Convert.ToString(parser.getSymbolCount());
             writeToFile(result);
         }
 

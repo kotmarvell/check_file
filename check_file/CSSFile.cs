@@ -8,17 +8,17 @@ namespace check_file
 {
     class CSSFile : AbstractParser
     {
-        private string finalName;
+        private string filePath;
 
-        public CSSFile(string finalName)
+        public CSSFile(string filePath)
         {
-            this.finalName = finalName;
+            this.filePath = filePath;
         }
         public override int getSymbolCount()
         { 
             int countOpen = 0;
             int countClose = 0;
-            StreamReader file = new StreamReader(finalName, System.Text.Encoding.Default);
+            StreamReader file = new StreamReader(filePath, System.Text.Encoding.Default);
             string line;
             while ((line = file.ReadLine()) != null)
             {
