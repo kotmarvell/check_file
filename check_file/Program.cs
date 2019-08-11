@@ -28,7 +28,7 @@ namespace check_file
         {
             Console.WriteLine($"File: {e.Name} {e.ChangeType} ");  
             string finalName = nameDirectory + "/" + Convert.ToString(e.Name);
-            getClassByFileType(finalName);
+            countSymbols(finalName);
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
@@ -43,30 +43,24 @@ namespace check_file
             return type;
         }
 
-        private static void getClassByFileType(string finalName)
+        private static AbstractParser getParserByType(string type, string name)
         {
-            string type = typeFile(finalName);
             switch (type)
             {
                 case ".css":
-                    {
-                        CSSFile file = new CSSFile(finalName);
-                        Console.WriteLine(file.getSymbolCount());
-                        break;
-                    }
+                    return new CSSFile(name);
                 case ".html":
-                    {
-                        HTMLFile file = new HTMLFile(finalName);
-                        Console.WriteLine(file.getSymbolCount());
-                        break;
-                    }
+                    return new HTMLFile(name);
                 default:
-                    {
-                        OtherFile file = new OtherFile(finalName);
-                        Console.WriteLine(file.getSymbolCount());
-                        break;
-                    }
+                    return new OtherFile(name);
             }
+        }
+
+        private static void countSymbols(string finalName)
+        {
+            string type = typeFile(finalName);
+            AbstractParser parser = getParserByType(type, finalName);
+            Console.WriteLine(parser.getSymbolCount());
         }
     }
 }
