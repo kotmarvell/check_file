@@ -27,12 +27,6 @@ namespace check_file
                 MatchCollection mc = regex.Matches(line);
 
                 countSymbol += mc.Count;
-
-                string pattern2 = @"\w*</div>";
-                regex = new Regex(pattern2);
-                mc = regex.Matches(line);
-
-                countSymbol += mc.Count;
             }
 
             return countSymbol;
