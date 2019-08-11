@@ -50,14 +50,14 @@ namespace check_file
             {
                 case ".css":
                     {
-                        //CSSFile file = new CSSFile(finalName);
-                        //Console.WriteLine(file.getSymbolCount());
+                        CSSFile file = new CSSFile(finalName);
+                        Console.WriteLine(file.getSymbolCount());
                         break;
                     }
                 case ".html":
                     {
-                        //HTMLFile file = new HTMLFile(finalName);
-                        //Console.WriteLine(file.getSymbolCount());
+                        HTMLFile file = new HTMLFile(finalName);
+                        Console.WriteLine(file.getSymbolCount());
                         break;
                     }
                 default:

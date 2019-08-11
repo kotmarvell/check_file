@@ -2,31 +2,49 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace check_file
 {
     class CSSFile : AbstractParser
     {
-        public string nameFile;
-        public string nameDirectory;
+        public string finalName;
 
-        //public CSSFile(string name, string nameDirectory)
-        //{
-        //    nameFile = name;
-        //    this.nameDirectory = nameDirectory;
-        //}
+        public CSSFile(string finalName)
+        {
+            this.finalName = finalName;
+        }
         public override int getSymbolCount()
         {
-            int countSimbol = 0;
-            //nameDirectory += "/" + nameFile;
-            //StreamReader file = new StreamReader(nameDirectory, System.Text.Encoding.Default);
-            //string line;
-            //while ((line = file.ReadLine()) != null)
-            //{
-            //    //поиск знаков препинания
-            //}
+            int countSymbol = 0;
 
-            return countSimbol;
+            int countOt = 0;
+            int countZac = 0;
+            StreamReader file = new StreamReader(finalName, System.Text.Encoding.Default);
+            string line;
+            while ((line = file.ReadLine()) != null)
+            {
+                string pattern1 = @"}";
+                Regex regex = new Regex(pattern1);
+                MatchCollection mc = regex.Matches(line);
+
+                countOt += mc.Count;
+
+                string pattern2 = @"{";
+                regex = new Regex(pattern2);
+                mc = regex.Matches(line);
+
+                countZac += mc.Count;
+            }
+
+            if (countZac == countOt)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }     
         }
     }
 }

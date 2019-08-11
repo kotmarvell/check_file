@@ -2,32 +2,40 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace check_file
 {
     class HTMLFile : AbstractParser
     {
-        public string nameFile;
-        public string nameDirectory;
+        public string finalName;
 
-        //public HTMLFile(string name, string nameDirectory)
-        //{
-        //    nameFile = name;
-        //    this.nameDirectory = nameDirectory;
-        //}
+        public HTMLFile(string finalName)
+        {
+            this.finalName = finalName;
+        }
         public override int getSymbolCount()
         {
-            int countSimbol = 0;
+            int countSymbol = 0;
 
-            //nameDirectory += "/" + nameFile;
-            //StreamReader file = new StreamReader(nameDirectory, System.Text.Encoding.Default);
-            //string line;
-            //while ((line = file.ReadLine()) != null)
-            //{
-            //    //поиск знаков препинания
-            //}
+            StreamReader file = new StreamReader(finalName, System.Text.Encoding.Default);
+            string line;
+            while ((line = file.ReadLine()) != null)
+            {
+                string pattern1 = @"}";
+                Regex regex = new Regex(pattern1);
+                MatchCollection mc = regex.Matches(line);
 
-            return countSimbol;
+                countSymbol += mc.Count;
+
+                string pattern2 = @"{";
+                regex = new Regex(pattern2);
+                mc = regex.Matches(line);
+
+                countSymbol += mc.Count;
+            }
+
+            return countSymbol;
         }
     }
 }
