@@ -8,7 +8,7 @@ namespace check_file
 {
     class CSSFile : AbstractParser
     {
-        public string finalName;
+        private string finalName;
 
         public CSSFile(string finalName)
         {

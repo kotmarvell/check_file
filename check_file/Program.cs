@@ -8,7 +8,7 @@ namespace check_file
         public static string nameDirectory = "C:/Users/kotmavell/Desktop/test";
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world");
+            Console.WriteLine("Hello. Please write the directory path.");
             //string nameDirectory = Console.ReadLine();
 
             FileSystemWatcher watcher = new FileSystemWatcher(nameDirectory);
@@ -17,8 +17,7 @@ namespace check_file
 
             watcher.Changed += new FileSystemEventHandler(OnChanged);
             watcher.Created += new FileSystemEventHandler(OnChanged);
-            watcher.Deleted += new FileSystemEventHandler(OnChanged);
-            watcher.Renamed += new RenamedEventHandler(OnRenamed);            
+            watcher.Deleted += new FileSystemEventHandler(OnChanged);            
 
             watcher.EnableRaisingEvents = true;
             Console.ReadKey();
@@ -27,13 +26,8 @@ namespace check_file
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
             Console.WriteLine($"File: {e.Name} {e.ChangeType} ");  
-            string finalName = nameDirectory + "/" + Convert.ToString(e.Name);
-            countSymbols(finalName);
-        }
-
-        private static void OnRenamed(object source, RenamedEventArgs e)
-        {
-            Console.WriteLine("File: {0} renamed to {1}", e.OldName, e.Name);
+            string filePath = nameDirectory + "/" + Convert.ToString(e.Name);
+            countSymbols(filePath, Convert.ToString(e.ChangeType), Convert.ToString(e.Name));
         }
 
         private static string typeFile(string name)
@@ -43,24 +37,31 @@ namespace check_file
             return type;
         }
 
-        private static AbstractParser getParserByType(string type, string name)
+        private static AbstractParser getParserByType(string type, string filePath)
         {
             switch (type)
             {
                 case ".css":
-                    return new CSSFile(name);
+                    return new CSSFile(filePath);
                 case ".html":
-                    return new HTMLFile(name);
+                    return new HTMLFile(filePath);
                 default:
-                    return new OtherFile(name);
+                    return new OtherFile(filePath);
             }
         }
 
-        private static void countSymbols(string finalName)
+        private static void countSymbols(string filePath, string changeType, string nameFile)
         {
-            string type = typeFile(finalName);
-            AbstractParser parser = getParserByType(type, finalName);
-            Console.WriteLine(parser.getSymbolCount());
+            string type = typeFile(filePath);
+            AbstractParser parser = getParserByType(type, filePath);
+            string result = nameFile + " " + changeType + " " + parser.getSymbolCount();
+            writeToFile(result);
+        }
+
+        private static void writeToFile(string myString)
+        {
+            StreamWriter writer = new StreamWriter("output.txt", false, System.Text.Encoding.Default);
+            writer.WriteLine(myString);
         }
     }
 }

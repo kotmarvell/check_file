@@ -8,7 +8,7 @@ namespace check_file
 {
     class OtherFile : AbstractParser
     {
-        public string finalName;
+        private string finalName;
 
         public OtherFile(string finalName)
         {
